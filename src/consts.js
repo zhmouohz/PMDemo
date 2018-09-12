@@ -28,8 +28,8 @@ module.exports = {
     },
     {
       title: '金额',
-      dataIndex: 'Amt',
-      key: 'Amt',
+      dataIndex: 'amt',
+      key: 'amt',
       width: 100,
     },
     {
