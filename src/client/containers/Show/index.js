@@ -10,7 +10,8 @@ const socketPath = projectConst.serverPath
 const socket = io.connect(socketPath)
 
 const columns = projectConst.columns
-
+const sumColumns = projectConst.sumColumns
+const warnColumns = projectConst.warnColumns
 class ShowContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -45,10 +46,24 @@ class ShowContainer extends React.Component {
     //ref={node => (this.contentNode = node)}
     return (
       <div>
-        <div style={{ display: 'inline', float: 'left' }}>
+        <div style={{ display: 'inline', float: 'none' }}>
           <div>
             {/* <Show msgList={msgList} /> */}
-            <Table columns={columns} data={msgList} />
+            <Table columns={warnColumns} data={msgList.warnMsg} />
+          </div>
+        </div>
+
+        <div style={{ display: 'inline', float: 'none' }}>
+          <div>
+            {/* <Show msgList={msgList} /> */}
+            <Table columns={columns} data={msgList.msg} />
+          </div>
+        </div>
+
+        <div style={{ display: 'inline', float: 'none' }}>
+          <div>
+            {/* <Show msgList={msgList} /> */}
+            <Table columns={sumColumns} data={msgList.sumMsg} />
           </div>
         </div>
       </div>
