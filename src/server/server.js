@@ -3,22 +3,29 @@ const http = require('http')
 const socketIo = require('socket.io')
 const config = require('config')
 const logger = require('./logger')('server')
-const moment = require('moment')
+var getRawBody = require('raw-body')
 
 const app = express()
 const httpServer = http.Server(app)
 const io = socketIo(httpServer)
 
-//todo 检查错误率
-const checkErrRate = info => {
-  if (info) return false
-  return false
-}
-
-app.get(config.get('path.ACCEPTMESSAGE'), (req, res) => {
-  io.emit('msg', req.query)
-  if (checkErrRate) io.emit('errRateMsg', { dateTime: moment().format('YYYY-MM-DD HH:mm:ss') })
-  res.status(201).end()
+app.post(config.get('path.ACCEPTMESSAGE'), (req, res) => {
+  getRawBody(
+    req,
+    {
+      length: req.headers['content-length'],
+      encoding: req.charset,
+    },
+    function(err, string) {
+      if (err) {
+        res.status(500).end()
+      } else {
+        console.log(string)
+        io.emit('msg', JSON.parse(string))
+        res.status(201).end()
+      }
+    }
+  )
 })
 app.get('/test', (req, res) => {
   res.send({ code: 'SUCCESS' })
