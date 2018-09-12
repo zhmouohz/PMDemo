@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 import consts from '../../consts'
 
 const isMsg = payload => {
-  if (payload.Amt) {
+  if (payload.amt) {
     return true
   } else return false
 }
@@ -18,7 +18,7 @@ const iswarnMsg = payload => {
 const newMsgReducer = createReducer(
   {
     [actions.newMsg]: (state, payload) => {
-      // if (payload) return [...state, payload]
+      const newState = {}
       if (isMsg(payload)) {
         state.msg = [...state.msg, payload]
         if (state.msg.length > consts.size) {
@@ -35,7 +35,11 @@ const newMsgReducer = createReducer(
           state.sumMsg = state.sumMsg.slice(-1 * consts.size)
         }
       }
-      return state
+      newState.msg = state.msg
+      newState.warnMsg = state.warnMsg
+      newState.sumMsg = state.sumMsg
+      console.log('reducer', newState)
+      return newState
     },
   },
   { msg: [], sumMsg: [], warnMsg: [] }

@@ -22,11 +22,13 @@ app.post(config.get('path.ACCEPTMESSAGE'), (req, res) => {
           res.status(500).end()
         } else {
           try {
-            console.log('string', string)
-            io.emit('msg', JSON.parse(string))
+            const test = JSON.parse(string)
+            console.log(typeof test, '   ', test)
+            io.emit('msg', test)
             res.status(201).end()
           } catch (e) {
             console.log('convertString:' + string)
+            res.status(500).end()
           }
         }
       }

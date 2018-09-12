@@ -70,10 +70,12 @@ class ShowContainer extends React.Component {
     )
   }
 }
-const mapStateToProps = state => ({
-  msgList: state.newMsg,
-  errRateMsg: state.newErrRateMsg,
-})
+const mapStateToProps = state => {
+  return {
+    msgList: state.newMsg,
+    errRateMsg: state.newErrRateMsg,
+  }
+}
 
 function getScrollTop() {
   if (!document.documentElement.scrollTop) {
