@@ -10,22 +10,30 @@ const httpServer = http.Server(app)
 const io = socketIo(httpServer)
 
 app.post(config.get('path.ACCEPTMESSAGE'), (req, res) => {
-  getRawBody(
-    req,
-    {
-      length: req.headers['content-length'],
-      encoding: req.charset,
-    },
-    function(err, string) {
-      if (err) {
-        res.status(500).end()
-      } else {
-        console.log(string)
-        io.emit('msg', JSON.parse(string))
-        res.status(201).end()
+  try {
+    getRawBody(
+      req,
+      {
+        length: req.headers['content-length'],
+        encoding: req.charset,
+      },
+      function(err, string) {
+        if (err) {
+          res.status(500).end()
+        } else {
+          try {
+            console.log('string', string)
+            io.emit('msg', JSON.parse(string))
+            res.status(201).end()
+          } catch (e) {
+            console.log('convertString:' + string)
+          }
+        }
       }
-    }
-  )
+    )
+  } catch (e) {
+    res.status(500).end()
+  }
 })
 app.get('/test', (req, res) => {
   res.send({ code: 'SUCCESS' })
