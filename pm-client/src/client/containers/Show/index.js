@@ -6,6 +6,9 @@ import Table from 'rc-table'
 import io from 'socket.io-client'
 import projectConst from '../../../consts'
 
+import 'rc-table/assets/index.css'
+import '../../../../assets/mycss.css'
+
 const socketPath = projectConst.serverPath
 const socket = io.connect(socketPath)
 
@@ -43,27 +46,23 @@ class ShowContainer extends React.Component {
     if (msgList === null || msgList === undefined) {
       return <div />
     }
-    //ref={node => (this.contentNode = node)}
     return (
       <div>
         <div style={{ display: 'inline', float: 'none' }}>
           <div>
-            {/* <Show msgList={msgList} /> */}
-            <Table columns={warnColumns} data={msgList.warnMsg} />
+            <Table rowClassName="warnRow" columns={warnColumns} data={msgList.warnMsg} scroll={{ x: false, y: projectConst.warnTableHeight || false }} />
           </div>
         </div>
 
         <div style={{ display: 'inline', float: 'none' }}>
           <div>
-            {/* <Show msgList={msgList} /> */}
-            <Table columns={columns} data={msgList.msg} />
+            <Table columns={columns} data={msgList.msg} scroll={{ x: false, y: projectConst.msgHeight || false }} />
           </div>
         </div>
 
         <div style={{ display: 'inline', float: 'none' }}>
           <div>
-            {/* <Show msgList={msgList} /> */}
-            <Table columns={sumColumns} data={msgList.sumMsg} />
+            <Table columns={sumColumns} data={msgList.sumMsg} scroll={{ x: false, y: projectConst.logHeight || false }} />
           </div>
         </div>
       </div>

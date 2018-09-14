@@ -3,7 +3,7 @@ const http = require('http')
 const socketIo = require('socket.io')
 const config = require('config')
 const logger = require('./logger')('server')
-var getRawBody = require('raw-body')
+const getRawBody = require('raw-body')
 
 const app = express()
 const httpServer = http.Server(app)
@@ -23,11 +23,9 @@ app.post(config.get('path.ACCEPTMESSAGE'), (req, res) => {
         } else {
           try {
             const test = JSON.parse(string)
-            console.log(typeof test, '   ', test)
             io.emit('msg', test)
-            res.status(201).end()
+            res.status(200).end()
           } catch (e) {
-            console.log('convertString:' + string)
             res.status(500).end()
           }
         }
@@ -52,3 +50,4 @@ httpServer.listen(3000, err => {
     logger.info('started')
   }
 })
+

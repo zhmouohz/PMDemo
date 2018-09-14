@@ -26,13 +26,13 @@ const newMsgReducer = createReducer(
         }
       } else if (iswarnMsg(payload)) {
         state.warnMsg = [...state.warnMsg, payload]
-        if (state.warnMsg.length > consts.size) {
-          state.warnMsg = state.warnMsg.slice(-1 * consts.size)
+        if (state.warnMsg.length > consts.warnSize) {
+          state.warnMsg = state.warnMsg.slice(-1 * consts.warnSize)
         }
       } else {
         state.sumMsg = [...state.sumMsg, ...payload]
-        if (state.sumMsg.length > consts.size) {
-          state.sumMsg = state.sumMsg.slice(-1 * consts.size)
+        if (state.sumMsg.length > consts.logSize) {
+          state.sumMsg = state.sumMsg.slice(-1 * consts.logSize)
         }
       }
       newState.msg = state.msg

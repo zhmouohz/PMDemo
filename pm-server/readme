@@ -1,0 +1,6 @@
+server端配置在/pm-server/config/default.js下
+通过post方式请求path.AcceptMessage下地址发送信息
+默认路径为http://localhost:3000/AcceptMessage
+默认访问路径为http://localhost:2999/
+server通过pm-server下npm start启动
+client通过pm-client下npm run dev启动
