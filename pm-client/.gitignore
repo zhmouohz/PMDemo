@@ -4,3 +4,4 @@ storage_*
 *.log
 .DS_Store
 .idea
+pmclient-win32-x64

@@ -1,7 +1,10 @@
-server端配置在/config/default.js下
-通过get方式请求path.AcceptMessage下地址发送信息
-默认路径为http://localhost:3000/AcceptMessage
-client端配置在/src/consts.js下，服务器路径在参数serverPath配置
+配置在/src/consts.js下，服务器路径在参数serverPath配置
 展示列在columns参数配置
 默认访问路径为http://localhost:2999/
 项目通过npm run dev启动
+
+
+打包：
+1 运行在 npm run build
+2 运行npm install electron-packager -g 安装打包工具
+3 运行electron-packager . pmclient --platform=win32 --arch=x64 --overwrite打包
